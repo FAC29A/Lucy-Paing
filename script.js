@@ -1,6 +1,8 @@
 import { toDoList, loadTasks } from './helpers/toDoList.js';
 import { addTask, completeTask, deleteTask, reorderTasks } from './helpers/taskFunctions.js';
 
+console.log(toDoList)
+
 const toDoForm = document.getElementById("toDoForm");
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
