@@ -1,4 +1,3 @@
-
 import { toDoList, saveTasks } from './toDoList.js';
 
 export function addTask(task) {
@@ -10,6 +9,7 @@ export function completeTask(i) {
   if (i >= 0 && i < toDoList.length) {
     toDoList[i].completed = !toDoList[i].completed; // Toggle completion
     saveTasks();
+    displayTasks();
   }
 }
 
