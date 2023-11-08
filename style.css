@@ -77,6 +77,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
 }
+
 /*  task text and checkbox container */
 .task-content {
     display: flex;
@@ -111,14 +112,20 @@ h1 {
 /* delete button */
 .delete-btn {
     margin-left: auto;
-    padding: 0.3rem 0.6rem;
-    background: #e3342f;
-    color: white;
+    background-color: red;
+    color: #fff;
     border: none;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .delete-btn:hover {
-    background: #cc1f1a;
+    background: darkred;
+}
+
+label[contentEditable="true"]:focus {
+    border: 1px solid #c0c0c0;
+    padding: 3px;
+    background-color: #fff;
 }
