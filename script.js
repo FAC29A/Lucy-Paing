@@ -149,7 +149,7 @@ function displayTaskItem(task, index) {
 
   // Add a "Delete" button
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = "x";
+  deleteButton.textContent = "Delete";
   deleteButton.classList.add("delete-btn");
   deleteButton.addEventListener("click", function () {
     deleteTask(index);
