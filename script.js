@@ -1,53 +1,5 @@
-// Define an array to store the to-do list items
-const toDoList = [];
-
-// Function to save the state of toDoList to local storage
-function saveTasks() {
-  localStorage.setItem("toDoList", JSON.stringify(toDoList));
-}
-
-// Function to load tasks from local storage
-function loadTasks() {
-  const storedTasks = localStorage.getItem("toDoList");
-  if (storedTasks) {
-    toDoList.push(...JSON.parse(storedTasks));
-  }
-  displayTasks(); // Update the UI with stored tasks
-}
-
-// Modify existing functions to call saveTasks after changes
-function addTask(task) {
-  toDoList.push(task);
-  saveTasks();
-}
-
-function completeTask(i) {
-  if (i >= 0 && i < toDoList.length) {
-    toDoList[i].completed = !toDoList[i].completed; // Toggle completion
-    saveTasks();
-  }
-}
-
-function deleteTask(i) {
-  if (i >= 0 && i < toDoList.length) {
-    toDoList.splice(i, 1);
-    saveTasks();
-  }
-}
-
-function reorderTasks(originIndex, destIndex) {
-  const itemToMove = toDoList.splice(originIndex, 1)[0];
-  toDoList.splice(destIndex, 0, itemToMove);
-  saveTasks();
-}
-
-// Example usage:
-// addTask({ text: "Buy groceries", completed: false });
-// addTask({ text: "Do laundry", completed: false });
-// completeTask(0);
-// deleteTask(1);
-
-console.log(toDoList);
+import { toDoList, loadTasks } from './helpers/toDoList.js';
+import { addTask, completeTask, deleteTask, reorderTasks } from './helpers/taskFunctions.js';
 
 const toDoForm = document.getElementById("toDoForm");
 const taskInput = document.getElementById("taskInput");
@@ -88,16 +40,6 @@ function displayTasks() {
 
   // Clear the task list
   taskList.innerHTML = "";
-
-  // Display uncompleted tasks first
-  // uncompletedTasks.forEach(function (task, i) {
-  //   displayTaskItem(task, i);
-  // });
-
-  // Display completed tasks at the bottom
-  // completedTasks.forEach(function (task, i) {
-  //   displayTaskItem(task, i + uncompletedTasks.length);
-  // });
 
   // Display tasks maintaining their order
   toDoList.forEach(function (task, i) {
