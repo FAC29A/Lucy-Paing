@@ -1,4 +1,7 @@
+import { displayTasks } from "/script.js";
+
 export const toDoList = [];
+
 
 export function saveTasks() {
   localStorage.setItem("toDoList", JSON.stringify(toDoList));

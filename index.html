@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>To-Do List</h1>
 
     <!-- To-Do List Form -->
     <form id="toDoForm">
         <input type="text" id="taskInput" placeholder="Add a new task" required>
-        <button type="submit">Add</button>
+        <button id="submit-btn" type="submit">Add</button>
     </form>
 
-   <!-- To-Do List Display Wrapper -->
+    <!-- To-Do List Display Wrapper -->
     <div id="taskListWrapper">
         <ul id="taskList"></ul>
     </div>
     <script src="script.js" type="module"></script>
     <script src="tests.js" type="module"></script>
 </body>
+
 </html>
