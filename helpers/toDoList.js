@@ -10,5 +10,4 @@ export function loadTasks() {
   if (storedTasks) {
     toDoList.push(...JSON.parse(storedTasks));
   }
-  displayTasks();
 }

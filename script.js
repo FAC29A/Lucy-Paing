@@ -76,7 +76,6 @@ function displayTaskItem(task, index) {
   });
 
   label.addEventListener("blur", function () {
-    editTask(index, this.textContent);
     label.contentEditable = "false";
   });
 
