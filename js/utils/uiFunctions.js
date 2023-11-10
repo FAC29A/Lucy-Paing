@@ -31,7 +31,9 @@ function createTaskElement(task, index) {
   taskItem.appendChild(deleteButton);
 
   // Set the initial value for the priority dropdown
+  if (task.priority) {
   priorityDropdown.value = task.priority.toLowerCase();
+  }
 
   // Set up drag & drop
   setUpDragAndDrop(taskItem, index);
