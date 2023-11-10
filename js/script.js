@@ -1,10 +1,5 @@
 import { toDoList, loadTasks } from "./utils/storage.js";
-import {
-  addTask,
-  completeTask,
-  deleteTask,
-  reorderTasks,
-} from "./utils/taskFunctions.js";
+import { addTask } from "./utils/taskFunctions.js";
 import { displayTasks } from "./utils/uiFunctions.js";
 
 // Load tasks on start
