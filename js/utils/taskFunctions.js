@@ -1,27 +1,26 @@
-import { toDoList } from "./toDoList.js";
+import { toDoList, saveTasks } from "./storage.js";
 
 export function addTask(task) {
   toDoList.push(task);
   saveTasks();
 }
 
-export function completeTask(i) {
-  if (i >= 0 && i < toDoList.length) {
-    toDoList[i].completed = !toDoList[i].completed; // Toggle completion
+export function completeTask(index) {
+  if (index >= 0 && index < toDoList.length) {
+    toDoList[index].completed = !toDoList[index].completed;
     saveTasks();
-    displayTasks();
   }
 }
 
-export function deleteTask(i) {
-  if (i >= 0 && i < toDoList.length) {
-    toDoList.splice(i, 1);
+export function deleteTask(index) {
+  if (index >= 0 && index < toDoList.length) {
+    toDoList.splice(index, 1);
     saveTasks();
   }
 }
 
 export function reorderTasks(originIndex, destIndex) {
-  const itemToMove = toDoList.splice(originIndex, 1)[0];
-  toDoList.splice(destIndex, 0, itemToMove);
+  const item = toDoList.splice(originIndex, 1)[0];
+  toDoList.splice(destIndex, 0, item);
   saveTasks();
 }

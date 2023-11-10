@@ -20,6 +20,11 @@ body {
     justify-content: flex-start;
 }
 
+#logo {
+    height: 50px;
+    margin-top: 10px;
+}
+
 h1 {
     margin-top: 2rem;
     color: #333;
