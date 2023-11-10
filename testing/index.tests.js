@@ -1,5 +1,6 @@
-import { equal, notEqual, test } from "./test-helpers.js";
-import { toDoList } from "/js/utils/toDoList.js";
+import { equal, notEqual, test } from "/testing/test-helpers.js";
+import { toDoList } from "/js/utils/storage.js";
+import { addTask, completeTask } from "/js/utils/taskFunctions.js";
 
 const runTests = () => {
     test("Submitting a new task adds it to the list", () => {
