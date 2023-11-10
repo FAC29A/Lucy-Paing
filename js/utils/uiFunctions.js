@@ -20,12 +20,20 @@ function createTaskElement(task, index) {
   // Create task elements
   const checkbox = createCheckbox(task, index);
   const label = createLabel(task, index); // Pass index for inline editing
+  const priorityDropdown = createPriorityDropdown(index);
   const deleteButton = createDeleteButton(index);
+
 
   // Append elements in correct order for styling
   taskItem.appendChild(checkbox);
   taskItem.appendChild(label);
+  taskItem.appendChild(priorityDropdown);
   taskItem.appendChild(deleteButton);
+
+  // Set the initial value for the priority dropdown
+  if (task.priority) {
+  priorityDropdown.value = task.priority.toLowerCase();
+  }
 
   // Set up drag & drop
   setUpDragAndDrop(taskItem, index);
@@ -35,9 +43,11 @@ function createTaskElement(task, index) {
     label.focus();
   });
 
+
   // Prevent activating edit mode when clicking on checkbox or deleteButton
   checkbox.addEventListener("click", (event) => event.stopPropagation());
   deleteButton.addEventListener("click", (event) => event.stopPropagation());
+  priorityDropdown.addEventListener("click", (event) => event.stopPropagation());
 
   return taskItem;
 }
@@ -75,6 +85,41 @@ function createLabel(task, index) {
 
   return label;
 }
+
+// Add a priority dropdown
+function createPriorityDropdown(index) {
+  const priorityDropdown = document.createElement("select");
+  priorityDropdown.classList.add("priority-dropdown");
+
+  // Define priority options
+  const priorityOptions = ["Low", "Medium", "High"];
+
+  // Create and append option elements
+  priorityOptions.forEach((priority) => {
+    const option = document.createElement("option");
+    option.value = priority.toLowerCase();
+    option.text = priority;
+    priorityDropdown.appendChild(option);
+  });
+
+  // Add event listener to handle priority change
+  priorityDropdown.addEventListener("change", () => {
+    const selectedPriority = priorityDropdown.value;
+    console.log(`Selected Priority: ${selectedPriority}`);
+    updatePriority(index, selectedPriority);
+    displayTasks();
+  });
+
+  return priorityDropdown;
+}
+
+// Function to update task priority in your data structure
+function updatePriority(index, priority) {
+  console.log(`Updating Priority for Task at Index ${index} to ${priority}`)
+  toDoList[index].priority = priority;
+  saveTasks()
+}
+
 
 // Add a "Delete" button
 function createDeleteButton(index) {
