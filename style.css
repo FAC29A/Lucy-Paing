@@ -41,6 +41,7 @@ h1 {
     padding: 10px;
     border-radius: 5px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
 #toDoForm button {
@@ -57,6 +58,11 @@ h1 {
     background-color: #357ab8;
 }
 
+.selection-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
 #filterWrapper {
     margin-bottom: 1rem;
@@ -109,15 +115,24 @@ h1 {
     gap: 10px;
 }
 
+.task-label {
+    max-width: 80%;
+    overflow: hidden;
+    word-break: break-all; /* Break words to prevent overflow */
+    min-width: 0; /* Allow the label to shrink beyond its content size */
+}
+
+
 .action-container {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-
 #taskList li label {
-    margin-left: 0.5rem;
+    margin: 0 0.5rem 0 0.5rem;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 label[contentEditable="true"]:focus {
@@ -125,7 +140,6 @@ label[contentEditable="true"]:focus {
     padding: 5px;
     background-color: #fff;
 }
-
 
 /* checkbox */
 #taskList li input[type="checkbox"] {
@@ -138,7 +152,6 @@ label[contentEditable="true"]:focus {
     vertical-align: middle;
     position: relative;
 }
-
 
 
 /*tasks that are completed */
@@ -173,6 +186,7 @@ label[contentEditable="true"]:focus {
 }
 
 
+
 /* delete button */
 .delete-btn {
     margin-left: auto;
@@ -186,6 +200,12 @@ label[contentEditable="true"]:focus {
 
 .delete-btn:hover {
     background: darkred;
+}
+
+.priority-dropdown, #priorityFilter {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
