@@ -304,9 +304,9 @@ label[contentEditable="true"]:focus {
 
     .action-container {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns for the action container */
+        grid-template-columns: 10fr 1fr; /* Two columns for the action container */
         grid-gap: 5px; /* Add some space between items */
-        align-items: center;
+        justify-items: end;
     }
 
     #taskListWrapper {
