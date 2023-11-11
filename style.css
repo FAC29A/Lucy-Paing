@@ -59,6 +59,21 @@ h1 {
     background-color: #357ab8;
 }
 
+
+#filterWrapper {
+    margin-bottom: 1rem;
+}
+
+#searchWrapper {
+    margin-bottom: 1rem;
+}
+
+#searchInput {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
 /* container for the task list with a shadow */
 #taskListWrapper {
     display: none;
