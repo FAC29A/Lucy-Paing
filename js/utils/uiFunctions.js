@@ -3,11 +3,21 @@ import { completeTask, deleteTask, reorderTasks } from "./taskFunctions.js";
 
 export function displayTasks() {
   const taskList = document.getElementById("taskList");
+  const filter = document.getElementById("priorityFilter").value;
+  const searchText = document.getElementById("searchInput").value.toLowerCase();
+
   taskList.innerHTML = ""; // Clear current tasks
 
   toDoList.forEach((task, index) => {
-    const taskElement = createTaskElement(task, index);
-    taskList.appendChild(taskElement);
+    // Check if task matches the priority filter and the search text
+    const matchesPriority =
+      filter === "all" || filter === task.priority.toLowerCase();
+    const matchesSearch = task.text.toLowerCase().includes(searchText);
+
+    if (matchesPriority && matchesSearch) {
+      const taskElement = createTaskElement(task, index);
+      taskList.appendChild(taskElement);
+    }
   });
 
   toggleTaskListVisibility();
@@ -23,7 +33,6 @@ function createTaskElement(task, index) {
   const priorityDropdown = createPriorityDropdown(index);
   const deleteButton = createDeleteButton(index);
 
-
   // Append elements in correct order for styling
   taskItem.appendChild(checkbox);
   taskItem.appendChild(label);
@@ -32,7 +41,7 @@ function createTaskElement(task, index) {
 
   // Set the initial value for the priority dropdown
   if (task.priority) {
-  priorityDropdown.value = task.priority.toLowerCase();
+    priorityDropdown.value = task.priority.toLowerCase();
   }
 
   // Set up drag & drop
@@ -43,11 +52,12 @@ function createTaskElement(task, index) {
     label.focus();
   });
 
-
   // Prevent activating edit mode when clicking on checkbox or deleteButton
   checkbox.addEventListener("click", (event) => event.stopPropagation());
   deleteButton.addEventListener("click", (event) => event.stopPropagation());
-  priorityDropdown.addEventListener("click", (event) => event.stopPropagation());
+  priorityDropdown.addEventListener("click", (event) =>
+    event.stopPropagation()
+  );
 
   return taskItem;
 }
@@ -115,11 +125,10 @@ function createPriorityDropdown(index) {
 
 // Function to update task priority in your data structure
 function updatePriority(index, priority) {
-  console.log(`Updating Priority for Task at Index ${index} to ${priority}`)
+  console.log(`Updating Priority for Task at Index ${index} to ${priority}`);
   toDoList[index].priority = priority;
-  saveTasks()
+  saveTasks();
 }
-
 
 // Add a "Delete" button
 function createDeleteButton(index) {
@@ -163,3 +172,11 @@ function toggleTaskListVisibility(display) {
     taskListWrapper.style.display = "none";
   }
 }
+
+// Event listener for the priority filter dropdown
+document
+  .getElementById("priorityFilter")
+  .addEventListener("change", displayTasks);
+
+// Event listener for the search input field
+document.getElementById("searchInput").addEventListener("input", displayTasks);

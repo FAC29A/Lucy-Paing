@@ -21,6 +21,23 @@
         <button id="submit-btn" type="submit">Add</button>
     </form>
 
+    <!-- Filter Dropdown -->
+    <div id="filterWrapper">
+        <label for="priorityFilter">Filter by Priority:</label>
+        <select id="priorityFilter">
+            <option value="all">All</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+    </div>
+
+    <!-- Search Bar -->
+    <div id="searchWrapper">
+        <input type="text" id="searchInput" placeholder="Search tasks...">
+    </div>
+
+
    <!-- To-Do List Display Wrapper -->
     <div id="taskListWrapper">
         <ul id="taskList"></ul>
