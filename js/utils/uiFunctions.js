@@ -4,14 +4,20 @@ import { completeTask, deleteTask, reorderTasks } from "./taskFunctions.js";
 export function displayTasks() {
   const taskList = document.getElementById("taskList");
   const filter = document.getElementById("priorityFilter").value;
+  console.log("Current filter:", filter);
   const searchText = document.getElementById("searchInput").value.toLowerCase();
 
   taskList.innerHTML = ""; // Clear current tasks
 
   toDoList.forEach((task, index) => {
     // Check if task matches the priority filter and the search text
+    const taskPriority = task.priority ? task.priority.toLowerCase() : null; // No priority if undefined
     const matchesPriority =
-      filter === "all" || filter === task.priority.toLowerCase();
+      filter === "all" ||
+      (filter === "" && taskPriority === null) ||
+      filter === taskPriority;
+
+
     const matchesSearch = task.text.toLowerCase().includes(searchText);
 
     if (matchesPriority && matchesSearch) {
@@ -23,21 +29,50 @@ export function displayTasks() {
   toggleTaskListVisibility();
 }
 
+// priority color dot 
+function createPriorityDot(priority) {
+  const dot = document.createElement("span");
+  dot.classList.add("priority-dot");
+  if (priority) {
+    dot.classList.add(`priority-${priority.toLowerCase()}`);
+  } else {
+    dot.classList.add("priority-none");
+  }
+  return dot;
+}
+
+
+
 function createTaskElement(task, index) {
   const taskItem = document.createElement("li");
-  taskItem.classList.add("task-item"); // Add class for styling and drag & drop
+  taskItem.classList.add("task-item");
 
   // Create task elements
   const checkbox = createCheckbox(task, index);
-  const label = createLabel(task, index); // Pass index for inline editing
+  const priorityDot = createPriorityDot(task.priority);
+  const label = createLabel(task, index);
   const priorityDropdown = createPriorityDropdown(index);
   const deleteButton = createDeleteButton(index);
 
-  // Append elements in correct order for styling
-  taskItem.appendChild(checkbox);
-  taskItem.appendChild(label);
-  taskItem.appendChild(priorityDropdown);
-  taskItem.appendChild(deleteButton);
+  // Create a container for the left-side elements
+  const taskContent = document.createElement("div");
+  taskContent.classList.add("task-content");
+
+  // Create a container for the priority dropdown and delete button
+  const actionContainer = document.createElement("div");
+  actionContainer.classList.add("action-container");
+
+  // Append elements to their respective containers
+  taskContent.appendChild(priorityDot);
+  taskContent.appendChild(checkbox);
+  taskContent.appendChild(label);
+
+  actionContainer.appendChild(priorityDropdown);
+  actionContainer.appendChild(deleteButton);
+
+  // Append the containers to the taskItem
+  taskItem.appendChild(taskContent);
+  taskItem.appendChild(actionContainer);
 
   // Set the initial value for the priority dropdown
   if (task.priority) {
@@ -46,12 +81,6 @@ function createTaskElement(task, index) {
 
   // Set up drag & drop
   setUpDragAndDrop(taskItem, index);
-  // Set up click event for the task item
-  taskItem.addEventListener("click", () => {
-    label.contentEditable = "true";
-    label.focus();
-  });
-
   // Prevent activating edit mode when clicking on checkbox or deleteButton
   checkbox.addEventListener("click", (event) => event.stopPropagation());
   deleteButton.addEventListener("click", (event) => event.stopPropagation());
@@ -62,6 +91,7 @@ function createTaskElement(task, index) {
   return taskItem;
 }
 
+
 function createCheckbox(task, index) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -70,23 +100,33 @@ function createCheckbox(task, index) {
     completeTask(index);
     displayTasks();
   });
+  checkbox.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent event from bubbling up
+  });
   return checkbox;
 }
+
 
 function createLabel(task, index) {
   const label = document.createElement("label");
   label.textContent = task.text;
-  label.contentEditable = "false"; // Changed to false by default
+  label.contentEditable = "false"; // Initially not editable
   label.classList.add("task-label");
 
   label.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      task.text = label.textContent;
+      label.contentEditable = "false"; // Disable editing on Enter
+      label.blur(); // Remove focus from the label
+      task.text = label.textContent; // Update the task text
       saveTasks(); // Save the edited text
-      label.contentEditable = "false"; // Change to false after editing
-      label.blur();
     }
+  });
+
+  // Add click event listener to enable editing
+  label.addEventListener("click", () => {
+    label.contentEditable = "true";
+    label.focus();
   });
 
   if (task.completed) {
@@ -96,10 +136,19 @@ function createLabel(task, index) {
   return label;
 }
 
+
 // Add a priority dropdown
 function createPriorityDropdown(index) {
   const priorityDropdown = document.createElement("select");
   priorityDropdown.classList.add("priority-dropdown");
+
+  // Add a placeholder option
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.text = "Priority";
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
+  priorityDropdown.appendChild(placeholderOption);
 
   // Define priority options
   const priorityOptions = ["Low", "Medium", "High"];
