@@ -72,6 +72,7 @@ h1 {
     border: 1px solid #ddd;
 }
 
+
 /* container for the task list with a shadow */
 #taskListWrapper {
     display: none;
@@ -83,6 +84,13 @@ h1 {
     background: #fff;
     border-radius: 4px;
 }
+
+/* Resetting default padding and margin for task list */
+#taskList {
+    padding-left: 0px;
+    margin-left: 0;
+}
+
 
 /* each task item */
 #taskList li {
@@ -96,33 +104,50 @@ h1 {
     align-items: center;
 }
 
+/* Adjusted styles for task item */
 .task-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Align items to the start for wrapped text */
     justify-content: space-between;
-    padding: 0.5rem;
+    flex-wrap: wrap;
+    /* Allow wrapping inside task item */
 }
 
 .task-content {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
+    flex-grow: 1;
+    /* Allow task content to grow */
+    min-width: 0;
+    /* Prevent flex items from growing past their container */
+    word-break: break-word;
+    /* Allow words to break and wrap */
+    /* Add a max-width to prevent pushing other elements */
+    max-width: calc(100% - 60px);
+    /* Adjust the 60px based on other elements' size */
+}
+
+#taskList li label {
+    margin-left: 0.1rem;
+    max-width: 100%;
+    flex-grow: 1;
+    text-align: left;
+    /* Align text to the left for a more natural look */
 }
 
 .action-container {
     display: flex;
     align-items: center;
     gap: 5px;
-}
-
-
-#taskList li label {
-    margin-left: 0.5rem;
+    flex-shrink: 0;
+    margin-left: auto;
 }
 
 label[contentEditable="true"]:focus {
     border: 1px solid #c0c0c0;
-    padding: 5px;
+    padding: 1px;
     background-color: #fff;
 }
 
@@ -137,8 +162,9 @@ label[contentEditable="true"]:focus {
     background-color: white;
     vertical-align: middle;
     position: relative;
+    flex-shrink: 0;
+    /* Prevent the checkbox from shrinking */
 }
-
 
 
 /*tasks that are completed */
@@ -147,13 +173,19 @@ label[contentEditable="true"]:focus {
     color: #aaa;
 }
 
-
+/* Original priority dot - visible on desktop */
 .priority-dot {
+    display: inline-block;
     height: 11px;
     width: 11px;
+    min-width: 11px;
+    min-height: 11px;
     border-radius: 50%;
-    display: inline-block;
-    margin-right: 5px;
+}
+
+.priority-dot-mobile {
+    display: none;
+    /* Hide cloned dot on desktop */
 }
 
 .priority-high {
@@ -191,3 +223,18 @@ label[contentEditable="true"]:focus {
 
 
 /* Responsiveness  */
+
+/* Media query for mobile screens */
+@media (max-width: 600px) {
+
+    /* Hide original priority dot on mobile */
+    .priority-dot {
+        display: none;
+    }
+
+    /* Show cloned priority dot on mobile */
+    .priority-dot-mobile {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
