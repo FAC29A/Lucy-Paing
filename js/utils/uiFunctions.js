@@ -4,10 +4,11 @@ import { completeTask, deleteTask, reorderTasks } from "./taskFunctions.js";
 export function displayTasks() {
   const taskList = document.getElementById("taskList");
   const filter = document.getElementById("priorityFilter").value;
-  console.log("Current filter:", filter);
   const searchText = document.getElementById("searchInput").value.toLowerCase();
 
   taskList.innerHTML = ""; // Clear current tasks
+
+  let hasMatches = false; // Variable to track if there are matching tasks
 
   toDoList.forEach((task, index) => {
     // Check if task matches the priority filter and the search text
@@ -17,14 +18,21 @@ export function displayTasks() {
       (filter === "" && taskPriority === null) ||
       filter === taskPriority;
 
-
     const matchesSearch = task.text.toLowerCase().includes(searchText);
 
     if (matchesPriority && matchesSearch) {
       const taskElement = createTaskElement(task, index);
       taskList.appendChild(taskElement);
+      hasMatches = true; // Update the variable when a match is found
     }
   });
+  // Display a message if no tasks match
+  if (!hasMatches) {
+    const noTaskMessage = document.createElement("p");
+    noTaskMessage.innerHTML = `⚠️ No matches found for <strong>'${searchText}'</strong>.`;
+    noTaskMessage.style.textAlign = "center";
+    taskList.appendChild(noTaskMessage);
+  }
 
   toggleTaskListVisibility();
 }

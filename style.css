@@ -72,6 +72,10 @@ h1 {
     border: 1px solid #ddd;
 }
 
+#taskList p {
+    color: #666;
+    font-style: italic;
+}
 
 /* container for the task list with a shadow */
 #taskListWrapper {
@@ -235,6 +239,6 @@ label[contentEditable="true"]:focus {
     /* Show cloned priority dot on mobile */
     .priority-dot-mobile {
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 3px;
     }
 }
