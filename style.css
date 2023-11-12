@@ -282,7 +282,7 @@ label[contentEditable="true"]:focus {
     #taskList li {
         display: grid;
         /* grid-template-columns: 1fr 2fr;  */
-        grid-gap: 10px; /* Add some space between items */
+        grid-gap: 2em; /* Add some space between items */
         
         margin-bottom: 10px; /* Add some space between items */
     }
@@ -299,7 +299,7 @@ label[contentEditable="true"]:focus {
     .task-content {
         display: grid;
         grid-template-columns: 1fr 10fr; /* Two columns for the task content */
-        align-items: center;
+        align-items: start;
     }
 
     .action-container {
