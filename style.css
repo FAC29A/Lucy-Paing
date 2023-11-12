@@ -225,6 +225,23 @@ label[contentEditable="true"]:focus {
 }
 
 
+#footer {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    color: black;
+    font-size: 0.9rem;
+}
+
+#footer a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
 
 /* Responsiveness  */
 
