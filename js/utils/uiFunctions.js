@@ -51,6 +51,9 @@ function createTaskElement(task, index) {
   const checkbox = createCheckbox(task, index);
   const priorityDot = createPriorityDot(task.priority);
   const label = createLabel(task, index);
+  // Clone the priority dot for mobile view
+  const priorityDotMobile = priorityDot.cloneNode(true);
+  priorityDotMobile.classList.add("priority-dot-mobile"); // Add the mobile-specific class
   const priorityDropdown = createPriorityDropdown(index);
   const deleteButton = createDeleteButton(index);
 
@@ -67,6 +70,7 @@ function createTaskElement(task, index) {
   taskContent.appendChild(checkbox);
   taskContent.appendChild(label);
 
+  actionContainer.appendChild(priorityDotMobile); // Cloned dot for mobile
   actionContainer.appendChild(priorityDropdown);
   actionContainer.appendChild(deleteButton);
 
