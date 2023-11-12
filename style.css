@@ -2,16 +2,19 @@
 /* will do later  */
 
 html {
+    height: 100%;
+    min-height: 100vh;
     font-size: 16px;
     font-family: Arial, sans-serif;
 }
 
 body {
+    height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom right, #fffffa 0%, #5ea7d8 100%);
     background-attachment: fixed;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -235,8 +238,8 @@ label[contentEditable="true"]:focus {
 
 
 #footer {
+    margin-top: auto;
     text-align: center;
-    margin-top: 1rem;
     padding: 1rem;
     color: black;
     font-size: 0.9rem;
@@ -268,4 +271,3 @@ label[contentEditable="true"]:focus {
         margin-right: 3px;
     }
 }
-
