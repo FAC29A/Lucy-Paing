@@ -14,21 +14,11 @@ export function displayTasks() {
     let shouldDisplay = false;
 
     // Handle filter logic
-    switch (filter) {
-      case "completed":
-        shouldDisplay = task.completed;
-        break;
-      case "incomplete":
-        shouldDisplay = !task.completed;
-        break;
-      default:
-        const taskPriority = task.priority ? task.priority.toLowerCase() : null;
-        shouldDisplay =
-          filter === "all" ||
-          (filter === "" && taskPriority === null) ||
-          filter === taskPriority;
-        break;
-    }
+    const taskPriority = task.priority ? task.priority.toLowerCase() : null;
+    shouldDisplay =
+      filter === "all" ||
+      (filter === "" && taskPriority === null) ||
+      filter === taskPriority;
 
     // Apply search text filter
     shouldDisplay =
@@ -88,17 +78,9 @@ function createTaskElement(task, index) {
   actionContainer.classList.add("action-container");
 
   // Append elements to their respective containers
-  taskContent.appendChild(priorityDot);
-  taskContent.appendChild(checkbox);
-  taskContent.appendChild(label);
-
-  actionContainer.appendChild(priorityDotMobile); // Cloned dot for mobile
-  actionContainer.appendChild(priorityDropdown);
-  actionContainer.appendChild(deleteButton);
-
-  // Append the containers to the taskItem
-  taskItem.appendChild(taskContent);
-  taskItem.appendChild(actionContainer);
+  taskContent.append(priorityDot, checkbox, label);
+  actionContainer.append(priorityDotMobile, priorityDropdown, deleteButton);
+  taskItem.append(taskContent, actionContainer);
 
   // Set the initial value for the priority dropdown
   if (task.priority) {
