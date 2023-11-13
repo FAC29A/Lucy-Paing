@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const toDoForm = document.getElementById("toDoForm");
 const taskInput = document.getElementById("taskInput");
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", function () {
+  if (toDoList.length === 0 && searchInput.value.trim() !== "") {
+    alert("Please add a task before searching.");
+    searchInput.value = ""; // Clear the search input
+  } else {
+    displayTasks(); // Perform the search if tasks are present
+  }
+});
 
 toDoForm.addEventListener("submit", function (e) {
   e.preventDefault();

@@ -27,7 +27,7 @@ export function displayTasks() {
     }
   });
   // Display a message if no tasks match
-  if (!hasMatches) {
+  if (!hasMatches && searchText) {
     const noTaskMessage = document.createElement("p");
     noTaskMessage.innerHTML = `⚠️ No matches found for <strong>'${searchText}'</strong>.`;
     noTaskMessage.style.textAlign = "center";
