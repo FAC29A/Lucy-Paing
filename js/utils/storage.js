@@ -13,9 +13,10 @@ export function loadTasks() {
   if (storedTasks) {
     toDoList.push(...JSON.parse(storedTasks));
     toDoList.forEach((task) => {
-      if (!task.hasOwnProperty("priority")) {
+      if (!Object.prototype.hasOwnProperty.call(task, "priority")) {
         task.priority = "Low"; // Set a default priority if needed
       }
     });
   }
 }
+
