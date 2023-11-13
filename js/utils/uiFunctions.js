@@ -5,12 +5,6 @@ export function displayTasks() {
   const taskList = document.getElementById("taskList");
   const filter = document.getElementById("priorityFilter").value;
   const searchText = document.getElementById("searchInput").value.toLowerCase();
-  const clearCompletedBtn = document.getElementById("clearCompletedTasks");
-  // Check if there are completed tasks
-  const hasCompletedTasks = toDoList.some((task) => task.completed);
-
-  // Show or hide the clear completed tasks button
-  clearCompletedBtn.style.display = hasCompletedTasks ? "block" : "none";
 
   taskList.innerHTML = ""; // Clear current tasks
 
@@ -19,7 +13,7 @@ export function displayTasks() {
   toDoList.forEach((task, index) => {
     let shouldDisplay = false;
 
-     // Handle filter logic
+    // Handle filter logic
     switch (filter) {
       case "completed":
         shouldDisplay = task.completed;
@@ -29,16 +23,16 @@ export function displayTasks() {
         break;
       default:
         const taskPriority = task.priority ? task.priority.toLowerCase() : null;
-        shouldDisplay = 
+        shouldDisplay =
           filter === "all" ||
           (filter === "" && taskPriority === null) ||
           filter === taskPriority;
         break;
     }
 
-   // Apply search text filter
-    shouldDisplay = shouldDisplay && task.text.toLowerCase().includes(searchText);
-
+    // Apply search text filter
+    shouldDisplay =
+      shouldDisplay && task.text.toLowerCase().includes(searchText);
 
     // Display task if it meets the criteria
     if (shouldDisplay) {

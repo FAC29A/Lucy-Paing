@@ -36,7 +36,6 @@ toDoForm.addEventListener("submit", function (e) {
   }
 });
 
-
 // New function to clear completed tasks
 function clearCompletedTasks() {
   for (let i = toDoList.length - 1; i >= 0; i--) {
@@ -50,6 +49,6 @@ function clearCompletedTasks() {
 
 // Event listener for clearing completed tasks
 const clearCompletedBtn = document.getElementById("clearCompletedTasks");
-clearCompletedBtn.addEventListener("click", function() {
+clearCompletedBtn.addEventListener("click", function () {
   clearCompletedTasks();
 });
