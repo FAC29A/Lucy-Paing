@@ -2,16 +2,19 @@
 /* will do later  */
 
 html {
+    height: 100%;
+    min-height: 100vh;
     font-size: 16px;
     font-family: Arial, sans-serif;
 }
 
 body {
+    height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom right, #fffffa 0%, #5ea7d8 100%);
     background-attachment: fixed;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +66,11 @@ h1 {
 }
 
 #searchWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 #searchInput {
@@ -72,6 +79,19 @@ h1 {
     border: 1px solid #ddd;
 }
 
+
+.visually-hidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+#taskList p {
+    color: #666;
+    font-style: italic;
+}
 
 /* container for the task list with a shadow */
 #taskListWrapper {
@@ -119,22 +139,16 @@ h1 {
     align-items: center;
     gap: 6px;
     flex-grow: 1;
-    /* Allow task content to grow */
     min-width: 0;
-    /* Prevent flex items from growing past their container */
     word-break: break-word;
-    /* Allow words to break and wrap */
-    /* Add a max-width to prevent pushing other elements */
     max-width: calc(100% - 60px);
-    /* Adjust the 60px based on other elements' size */
 }
 
 #taskList li label {
     margin-left: 0.1rem;
-    max-width: 100%;
-    flex-grow: 1;
+    max-width: calc(100% - 60px);
+    flex-grow: 0;
     text-align: left;
-    /* Align text to the left for a more natural look */
 }
 
 .action-container {
@@ -163,7 +177,6 @@ label[contentEditable="true"]:focus {
     vertical-align: middle;
     position: relative;
     flex-shrink: 0;
-    /* Prevent the checkbox from shrinking */
 }
 
 
@@ -221,6 +234,23 @@ label[contentEditable="true"]:focus {
 }
 
 
+#footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 1rem;
+    color: black;
+    font-size: 0.9rem;
+}
+
+#footer a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
 
 /* Responsiveness  */
 
@@ -235,6 +265,6 @@ label[contentEditable="true"]:focus {
     /* Show cloned priority dot on mobile */
     .priority-dot-mobile {
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 3px;
     }
 }

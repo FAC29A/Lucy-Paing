@@ -4,32 +4,46 @@ import { completeTask, deleteTask, reorderTasks } from "./taskFunctions.js";
 export function displayTasks() {
   const taskList = document.getElementById("taskList");
   const filter = document.getElementById("priorityFilter").value;
-  console.log("Current filter:", filter);
   const searchText = document.getElementById("searchInput").value.toLowerCase();
 
   taskList.innerHTML = ""; // Clear current tasks
 
+  let hasMatches = false; // Variable to track if there are matching tasks
+
   toDoList.forEach((task, index) => {
-    // Check if task matches the priority filter and the search text
-    const taskPriority = task.priority ? task.priority.toLowerCase() : null; // No priority if undefined
-    const matchesPriority =
+    let shouldDisplay = false;
+
+    // Handle filter logic
+    const taskPriority = task.priority ? task.priority.toLowerCase() : null;
+    shouldDisplay =
       filter === "all" ||
       (filter === "" && taskPriority === null) ||
       filter === taskPriority;
 
+    // Apply search text filter
+    shouldDisplay =
+      shouldDisplay && task.text.toLowerCase().includes(searchText);
 
-    const matchesSearch = task.text.toLowerCase().includes(searchText);
-
-    if (matchesPriority && matchesSearch) {
+    // Display task if it meets the criteria
+    if (shouldDisplay) {
       const taskElement = createTaskElement(task, index);
       taskList.appendChild(taskElement);
+      hasMatches = true;
     }
   });
+
+  // Display a message if no tasks match
+  if (!hasMatches && searchText) {
+    const noTaskMessage = document.createElement("p");
+    noTaskMessage.innerHTML = `⚠️ No matches found for <strong>'${searchText}'</strong>.`;
+    noTaskMessage.style.textAlign = "center";
+    taskList.appendChild(noTaskMessage);
+  }
 
   toggleTaskListVisibility();
 }
 
-// priority color dot 
+// priority color dot
 function createPriorityDot(priority) {
   const dot = document.createElement("span");
   dot.classList.add("priority-dot");
@@ -40,8 +54,6 @@ function createPriorityDot(priority) {
   }
   return dot;
 }
-
-
 
 function createTaskElement(task, index) {
   const taskItem = document.createElement("li");
@@ -66,17 +78,9 @@ function createTaskElement(task, index) {
   actionContainer.classList.add("action-container");
 
   // Append elements to their respective containers
-  taskContent.appendChild(priorityDot);
-  taskContent.appendChild(checkbox);
-  taskContent.appendChild(label);
-
-  actionContainer.appendChild(priorityDotMobile); // Cloned dot for mobile
-  actionContainer.appendChild(priorityDropdown);
-  actionContainer.appendChild(deleteButton);
-
-  // Append the containers to the taskItem
-  taskItem.appendChild(taskContent);
-  taskItem.appendChild(actionContainer);
+  taskContent.append(priorityDot, checkbox, label);
+  actionContainer.append(priorityDotMobile, priorityDropdown, deleteButton);
+  taskItem.append(taskContent, actionContainer);
 
   // Set the initial value for the priority dropdown
   if (task.priority) {
@@ -95,7 +99,6 @@ function createTaskElement(task, index) {
   return taskItem;
 }
 
-
 function createCheckbox(task, index) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -109,7 +112,6 @@ function createCheckbox(task, index) {
   });
   return checkbox;
 }
-
 
 function createLabel(task, index) {
   const label = document.createElement("label");
@@ -139,7 +141,6 @@ function createLabel(task, index) {
 
   return label;
 }
-
 
 // Add a priority dropdown
 function createPriorityDropdown(index) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +12,52 @@
     <script defer src="testing/index.tests.js" type="module"></script>
 
 </head>
+
 <body>
     <img id="logo" src="icon/tdl.png" alt="Logo">
     <h1>To-Do List</h1>
 
     <!-- To-Do List Form -->
     <form id="toDoForm">
+        <label for="taskInput" class="visually-hidden">Add a new task</label>
         <input type="text" id="taskInput" placeholder="✍️ Add a new task" required>
         <button id="submit-btn" type="submit">Add</button>
     </form>
 
     <!-- Filter Dropdown -->
     <div id="filterWrapper">
-        <label for="priorityFilter">Filter by Priority:</label>
+        <label for="priorityFilter">Filter & Sort:</label>
         <select id="priorityFilter">
             <option value="all">All</option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
         </select>
+
     </div>
 
     <!-- Search Bar -->
     <div id="searchWrapper">
+        <label for="searchInput" class="visually-hidden">Search tasks</label>
         <input type="text" id="searchInput" placeholder="Search tasks...">
+        
     </div>
+    <button id="clearCompletedTasks">Clear Completed Tasks</button>
 
-
-   <!-- To-Do List Display Wrapper -->
+    <!-- To-Do List Display Wrapper -->
     <div id="taskListWrapper">
         <ul id="taskList"></ul>
     </div>
 
+    <!-- Footer -->
+    <footer id="footer">
+        <p>Created by
+            <a href="https://github.com/lucfercas" target="_blank" rel="noopener">Lucy</a> and
+            <a href="https://github.com/Paing-Ko" target="_blank" rel="noopener">Paing</a> from FAC29A
+        </p>
+    </footer>
+
+
 </body>
+
 </html>
