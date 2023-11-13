@@ -1,5 +1,10 @@
-import { toDoList, loadTasks } from "./utils/storage.js";
-import { addTask } from "./utils/taskFunctions.js";
+import { toDoList, loadTasks, saveTasks } from "./utils/storage.js";
+import {
+  addTask,
+  completeTask,
+  deleteTask,
+  reorderTasks,
+} from "./utils/taskFunctions.js";
 import { displayTasks } from "./utils/uiFunctions.js";
 
 // Load tasks on start
@@ -29,4 +34,22 @@ toDoForm.addEventListener("submit", function (e) {
     taskInput.value = "";
     displayTasks();
   }
+});
+
+
+// New function to clear completed tasks
+function clearCompletedTasks() {
+  for (let i = toDoList.length - 1; i >= 0; i--) {
+    if (toDoList[i].completed) {
+      toDoList.splice(i, 1);
+    }
+  }
+  saveTasks();
+  displayTasks();
+}
+
+// Event listener for clearing completed tasks
+const clearCompletedBtn = document.getElementById("clearCompletedTasks");
+clearCompletedBtn.addEventListener("click", function() {
+  clearCompletedTasks();
 });

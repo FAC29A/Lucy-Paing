@@ -5,27 +5,49 @@ export function displayTasks() {
   const taskList = document.getElementById("taskList");
   const filter = document.getElementById("priorityFilter").value;
   const searchText = document.getElementById("searchInput").value.toLowerCase();
+  const clearCompletedBtn = document.getElementById("clearCompletedTasks");
+  // Check if there are completed tasks
+  const hasCompletedTasks = toDoList.some((task) => task.completed);
+
+  // Show or hide the clear completed tasks button
+  clearCompletedBtn.style.display = hasCompletedTasks ? "block" : "none";
 
   taskList.innerHTML = ""; // Clear current tasks
 
   let hasMatches = false; // Variable to track if there are matching tasks
 
   toDoList.forEach((task, index) => {
-    // Check if task matches the priority filter and the search text
-    const taskPriority = task.priority ? task.priority.toLowerCase() : null; // No priority if undefined
-    const matchesPriority =
-      filter === "all" ||
-      (filter === "" && taskPriority === null) ||
-      filter === taskPriority;
+    let shouldDisplay = false;
 
-    const matchesSearch = task.text.toLowerCase().includes(searchText);
+     // Handle filter logic
+    switch (filter) {
+      case "completed":
+        shouldDisplay = task.completed;
+        break;
+      case "incomplete":
+        shouldDisplay = !task.completed;
+        break;
+      default:
+        const taskPriority = task.priority ? task.priority.toLowerCase() : null;
+        shouldDisplay = 
+          filter === "all" ||
+          (filter === "" && taskPriority === null) ||
+          filter === taskPriority;
+        break;
+    }
 
-    if (matchesPriority && matchesSearch) {
+   // Apply search text filter
+    shouldDisplay = shouldDisplay && task.text.toLowerCase().includes(searchText);
+
+
+    // Display task if it meets the criteria
+    if (shouldDisplay) {
       const taskElement = createTaskElement(task, index);
       taskList.appendChild(taskElement);
-      hasMatches = true; // Update the variable when a match is found
+      hasMatches = true;
     }
   });
+
   // Display a message if no tasks match
   if (!hasMatches && searchText) {
     const noTaskMessage = document.createElement("p");
@@ -37,7 +59,7 @@ export function displayTasks() {
   toggleTaskListVisibility();
 }
 
-// priority color dot 
+// priority color dot
 function createPriorityDot(priority) {
   const dot = document.createElement("span");
   dot.classList.add("priority-dot");
@@ -48,8 +70,6 @@ function createPriorityDot(priority) {
   }
   return dot;
 }
-
-
 
 function createTaskElement(task, index) {
   const taskItem = document.createElement("li");
@@ -103,7 +123,6 @@ function createTaskElement(task, index) {
   return taskItem;
 }
 
-
 function createCheckbox(task, index) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -117,7 +136,6 @@ function createCheckbox(task, index) {
   });
   return checkbox;
 }
-
 
 function createLabel(task, index) {
   const label = document.createElement("label");
@@ -147,7 +165,6 @@ function createLabel(task, index) {
 
   return label;
 }
-
 
 // Add a priority dropdown
 function createPriorityDropdown(index) {

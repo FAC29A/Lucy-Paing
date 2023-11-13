@@ -103,6 +103,14 @@ h1 {
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 4px;
+    position: relative;
+}
+
+#clearCompletedTasks {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
 }
 
 /* Resetting default padding and margin for task list */
@@ -139,22 +147,16 @@ h1 {
     align-items: center;
     gap: 6px;
     flex-grow: 1;
-    /* Allow task content to grow */
     min-width: 0;
-    /* Prevent flex items from growing past their container */
     word-break: break-word;
-    /* Allow words to break and wrap */
-    /* Add a max-width to prevent pushing other elements */
     max-width: calc(100% - 60px);
-    /* Adjust the 60px based on other elements' size */
 }
 
 #taskList li label {
     margin-left: 0.1rem;
-    max-width: 100%;
-    flex-grow: 1;
+    max-width: calc(100% - 60px);
+    flex-grow: 0;
     text-align: left;
-    /* Align text to the left for a more natural look */
 }
 
 .action-container {
@@ -183,7 +185,6 @@ label[contentEditable="true"]:focus {
     vertical-align: middle;
     position: relative;
     flex-shrink: 0;
-    /* Prevent the checkbox from shrinking */
 }
 
 

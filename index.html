@@ -29,6 +29,8 @@
         <label for="priorityFilter">Filter by Priority:</label>
         <select id="priorityFilter">
             <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="incomplete">Incomplete</option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
@@ -42,9 +44,9 @@
 
     </div>
 
-
     <!-- To-Do List Display Wrapper -->
     <div id="taskListWrapper">
+        <button id="clearCompletedTasks">Clear Completed Tasks</button>
         <ul id="taskList"></ul>
     </div>
 
