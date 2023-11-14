@@ -113,7 +113,7 @@ function createCheckbox(task, index) {
   return checkbox;
 }
 
-function createLabel(task, index) {
+function createLabel(task) {
   const label = document.createElement("label");
   label.textContent = task.text;
   label.contentEditable = "false"; // Initially not editable
@@ -218,7 +218,7 @@ function setUpDragAndDrop(taskItem, index) {
 }
 
 // Hide or show the task list wrapper based on the number of tasks
-function toggleTaskListVisibility(display) {
+function toggleTaskListVisibility() {
   const taskListWrapper = document.getElementById("taskListWrapper");
   if (toDoList.length > 0) {
     taskListWrapper.style.display = "block";
