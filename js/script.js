@@ -1,8 +1,5 @@
 import { toDoList, loadTasks } from "./utils/storage.js";
-import {
-  addTask,
-  clearCompletedTasks,
-} from "./utils/taskFunctions.js";
+import { addTask, clearCompletedTasks } from "./utils/taskFunctions.js";
 import { displayTasks } from "./utils/uiFunctions.js";
 
 // Load tasks on start
@@ -11,10 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   displayTasks();
 });
 
+// Add event listener for logo click
+const logo = document.getElementById("logo");
+logo.addEventListener("click", () => {
+  window.location.reload();
+});
 const toDoForm = document.getElementById("toDoForm");
 const taskInput = document.getElementById("taskInput");
 const searchInput = document.getElementById("searchInput");
-
 
 searchInput.addEventListener("input", function () {
   if (toDoList.length === 0 && searchInput.value.trim() !== "") {
@@ -24,7 +25,6 @@ searchInput.addEventListener("input", function () {
     displayTasks(); // Perform the search if tasks are present
   }
 });
-
 
 toDoForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -47,7 +47,6 @@ toDoForm.addEventListener("submit", function (e) {
     displayTasks();
   }
 });
-
 
 // Event listener for clearing completed tasks
 const clearCompletedBtn = document.getElementById("clearCompletedTasks");
