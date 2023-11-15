@@ -249,6 +249,11 @@ label[contentEditable="true"]:focus {
     background-color: grey;
 }
 
+.priority-dropdown {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
 
 /* delete button */
 .delete-btn {
