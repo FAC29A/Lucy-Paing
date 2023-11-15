@@ -1,5 +1,8 @@
-/* :root ?? */
-/* will do later  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html {
     height: 100%;
@@ -21,14 +24,28 @@ body {
     justify-content: flex-start;
 }
 
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #logo {
     height: 50px;
-    margin-top: 1rem;
+    margin-top: 4rem;
 }
 
 h1 {
-    margin: 2rem;
-    color: #333;
+    font-family: 'Nunito', sans-serif;
+    font-size: 3em;
+    margin: 1rem;
+    color: black;
+}
+
+.selection-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .warning-message {
@@ -38,6 +55,7 @@ h1 {
     transition: opacity 0.5s, visibility 0.5s;
     margin: 10px 0px;
 }
+
 /* form */
 #toDoForm {
     display: flex;
@@ -53,7 +71,8 @@ h1 {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#toDoForm button {
+#toDoForm button,
+#clearCompletedTasks {
     border: none;
     background-color: #3c7fb8;
     color: white;
@@ -67,16 +86,17 @@ h1 {
     background-color: #357ab8;
 }
 
-
-#filterWrapper {
-    margin-bottom: 1rem;
+#filterWrapper select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 
 #searchWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     position: relative;
 }
 
@@ -125,10 +145,15 @@ h1 {
     margin-bottom: 1rem;
     background: #f9f9f9;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#taskList li label {
+    margin-bottom: .5em;
+    margin-left: .1rem;
 }
 
 /* Adjusted styles for task item */
@@ -143,8 +168,8 @@ h1 {
 
 .task-content {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    align-items: flex-start;
+    gap: 1em;
     flex-grow: 1;
     min-width: 0;
     word-break: break-word;
@@ -273,5 +298,9 @@ label[contentEditable="true"]:focus {
     .priority-dot-mobile {
         display: inline-block;
         margin-right: 3px;
+    }
+
+    .selection-menu {
+        flex-direction: column;
     }
 }
