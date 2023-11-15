@@ -89,6 +89,7 @@ function createTaskElement(task, index) {
 
   // Set up drag & drop
   setUpDragAndDrop(taskItem, index);
+
   // Prevent activating edit mode when clicking on checkbox or deleteButton
   checkbox.addEventListener("click", (event) => event.stopPropagation());
   deleteButton.addEventListener("click", (event) => event.stopPropagation());

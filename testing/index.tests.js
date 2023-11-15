@@ -4,7 +4,7 @@ import {
   addTask,
   completeTask,
   deleteTask,
-  clearCompletedTasks
+  clearCompletedTasks,
 } from "../js/utils/taskFunctions.js";
 import { displayTasks } from "../js/utils/uiFunctions.js";
 
@@ -38,7 +38,6 @@ const runTests = () => {
     );
   });
 
-
   test("Checking an entry marks it as complete", () => {
     // Arrange: Add a task
     addTask({ text: "Complete Me", completed: false });
@@ -53,7 +52,6 @@ const runTests = () => {
       true,
       "Task should be marked as completed"
     );
-
   });
 
   test("Deleting an entry removes it from the list", () => {
@@ -75,9 +73,7 @@ const runTests = () => {
       -1,
       "Task 'Delete Me' should be removed from the list."
     );
-
   });
-
 
   test("Display tasks based on priority filter", () => {
     // Arrange
@@ -105,7 +101,6 @@ const runTests = () => {
     toDoList.length = 0; // Clear the toDoList
   });
 
-
   test("Clearing completed tasks", () => {
     // Arrange
     toDoList.length = 0; // Reset the toDoList for isolation
@@ -129,7 +124,6 @@ const runTests = () => {
     // Cleanup
     toDoList.length = 0; // Clear the toDoList
   });
-
 };
 
 runTests();

@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon/tdl.png" type="image/x-icon">
@@ -16,39 +19,42 @@
 </head>
 
 <body>
-    <img id="logo" src="icon/tdl.png" alt="Logo">
-    <h1>To-Do List</h1>
-    
-    <span id="taskInputWarning" class="warning-message">Please enter a valid task. Task cannot be just whitespace.</span>
+    <header>
+        <img id="logo" src="icon/tdl.png" alt="Logo">
+        <h1>To-Do List</h1>
+    </header>
+    <span id="taskInputWarning" class="warning-message">Please enter a valid task. Task cannot be just
+        whitespace.</span>
 
     <!-- To-Do List Form -->
     <form id="toDoForm">
         <label for="taskInput" class="visually-hidden">Add a new task</label>
         <input type="text" id="taskInput" placeholder="✍️ Add a new task" required>
         <button id="submit-btn" type="submit">Add</button>
-        
     </form>
 
+    <section class="selection-menu">
+        <!-- Filter Dropdown -->
+        <div id="filterWrapper">
+            <label for="priorityFilter">Filter by: </label>
+            <select id="priorityFilter">
+                <option value="all" selected>All</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
 
-    <!-- Filter Dropdown -->
-    <div id="filterWrapper">
-        <label for="priorityFilter">Filter by Priority:</label>
-        <select id="priorityFilter">
-            <option value="all" selected>All</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-        </select>
+        <!-- Search Bar -->
+        <div id="searchWrapper">
+            <label for="searchInput" class="visually-hidden">Search tasks</label>
+            <input type="text" id="searchInput" placeholder="Search tasks...">
 
-    </div>
+        </div>
 
-    <!-- Search Bar -->
-    <div id="searchWrapper">
-        <label for="searchInput" class="visually-hidden">Search tasks</label>
-        <input type="text" id="searchInput" placeholder="Search tasks...">
-        
-    </div>
-    <button id="clearCompletedTasks">Clear Completed Tasks</button>
+        <!-- Clear Completed Tasks button -->
+        <button id="clearCompletedTasks">Clear Completed</button>
+    </section>
 
     <!-- To-Do List Display Wrapper -->
     <div id="taskListWrapper">
@@ -62,8 +68,6 @@
             <a href="https://github.com/Paing-Ko" target="_blank" rel="noopener">Paing</a> from FAC29A
         </p>
     </footer>
-
-
 </body>
 
 </html>
