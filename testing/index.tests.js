@@ -103,7 +103,6 @@ const runTests = () => {
     );
     // Cleanup
     toDoList.length = 0; // Clear the toDoList
-    localStorage.removeItem("toDoList"); // Clear the tasks from local storage
   });
 
 
@@ -111,7 +110,11 @@ const runTests = () => {
     // Arrange
     toDoList.length = 0; // Reset the toDoList for isolation
     addTask({ text: "Task to be completed", priority: "Low", completed: true });
-    addTask({ text: "Task to remain", priority: "High", completed: false });
+    addTask({
+      text: "Don't worry! Be Happy! 😊",
+      priority: "High",
+      completed: false,
+    });
 
     // Act
     clearCompletedTasks();
@@ -120,41 +123,13 @@ const runTests = () => {
     equal(toDoList.length, 1, "Only incomplete tasks should remain");
     equal(
       toDoList[0].text,
-      "Task to remain",
+      "Don't worry! Be Happy! 😊",
       "Remaining task should be the incomplete one"
     );
     // Cleanup
     toDoList.length = 0; // Clear the toDoList
-    localStorage.removeItem("toDoList"); // Clear the tasks from local storage
   });
 
-
-//   test("Deleting a specific task", () => {
-//     // Arrange
-//     toDoList.length = 0; // Reset the toDoList for isolation
-//     addTask({ text: "Task 1", priority: "Low", completed: false });
-//     addTask({
-//       text: "Don't worry! Be Happy! 😊 ",
-//       priority: "High",
-//       completed: false,
-//     });
-//     const deleteIndex = toDoList.findIndex((task) => task.text === "Task 1");
-
-//     // Act
-//     deleteTask(deleteIndex);
-
-//     // Assert
-//     equal(
-//       toDoList.findIndex((task) => task.text === "Task 1"),
-//       -1,
-//       "Task 1 should be deleted"
-//     );
-//     equal(toDoList.length, 1, "Only one task should remain after deletion");
-
-//     // Cleanup
-//     toDoList.length = 0; // Clear the toDoList
-//     localStorage.removeItem("toDoList"); // Clear the tasks from local storage
-//   });
 };
 
 runTests();
